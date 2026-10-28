@@ -1,0 +1,9 @@
+# Conclusiones
+
+SOAP es un protocolo que permite intercambiar información entre aplicaciones mediante mensajes XML. En la práctica pude observar que cada petición y cada respuesta viajaban dentro de un sobre con las secciones Envelope y Body, lo que aporta una estructura uniforme y predecible para que ambas partes entiendan el mensaje.
+
+WSDL es el contrato que describe un servicio: sus operaciones, los parámetros que recibe, los tipos de datos, las respuestas y la dirección donde se encuentra. Gracias a este documento, otra persona o aplicación puede consumir el servicio sin necesidad de adivinar cómo funciona. Consultar el WSDL y ejecutar una operación son acciones distintas: lo primero se hizo con una petición GET agregando ?wsdl al endpoint y solo devuelve la descripción del servicio, mientras que lo segundo se hizo con una petición POST que enviaba un sobre SOAP y devolvía el resultado de la operación.
+
+Separar las rutas en un Router resulta conveniente porque el archivo principal queda reducido a la configuración general, mientras que el registro de los servicios se concentra en un solo lugar. Si la aplicación creciera, agregar un servicio nuevo no implicaría modificar todo el proyecto. De manera similar, el middleware de registro permitió centralizar el seguimiento de las peticiones: se escribió una sola vez y registró tanto las consultas de los WSDL como las invocaciones de las cuatro operaciones, evitando repetir código y facilitando cambios futuros.
+
+SOAP con WSDL es adecuado en entornos como bancos o integraciones entre empresas, donde se requiere un contrato formal y estricto entre los sistemas. En cambio, una API REST con JSON es más sencilla para una aplicación web o móvil, ya que sus mensajes son más ligeros y no requieren un contrato tan detallado.
